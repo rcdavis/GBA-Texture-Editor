@@ -1,6 +1,6 @@
-project(ImGui)
+project(Engine)
 
-add_library(ImGui
+add_library(Engine STATIC
     src/imgui.cpp
     src/imgui_draw.cpp
     src/imgui_widgets.cpp
@@ -13,13 +13,13 @@ add_library(ImGui
     stb/src/stb_image.c
 )
 
-target_include_directories(ImGui PUBLIC
+target_include_directories(Engine PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/glad/include
 )
 
-target_include_directories(ImGui PRIVATE
+target_include_directories(Engine PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/stb/include
 )
 
-target_link_libraries(ImGui PRIVATE glfw)
+target_link_libraries(Engine PRIVATE glfw)
