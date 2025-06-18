@@ -11,6 +11,9 @@ add_library(ImGui
     glad/src/glad.c
 )
 
-target_include_directories(ImGui PUBLIC include glad/include)
+target_include_directories(ImGui PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/glad/include
+)
 
 target_link_libraries(ImGui PRIVATE glfw)

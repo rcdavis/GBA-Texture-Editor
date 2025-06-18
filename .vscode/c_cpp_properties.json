@@ -4,7 +4,8 @@
 			"name": "Linux",
 			"includePath": [
 				"${workspaceFolder}/Editor/include/",
-				"${workspaceFolder}/Editor/glad/include/",
+				"${workspaceFolder}/ImGui/include/",
+				"${workspaceFolder}/ImGui/glad/include/",
 				"/usr/include"
 			],
 			"defines": [

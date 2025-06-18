@@ -1,6 +1,7 @@
 project(Editor)
 
 add_executable(Editor
+    src/Application.cpp
     src/Main.cpp
 )
 
