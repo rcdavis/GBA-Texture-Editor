@@ -8,6 +8,7 @@ add_library(ImGui
     src/imgui_demo.cpp
     src/imgui_impl_glfw.cpp
     src/imgui_impl_opengl3.cpp
+    src/ImGuiFileDialog.cpp
     glad/src/glad.c
 )
 

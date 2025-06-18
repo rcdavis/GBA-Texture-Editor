@@ -10,6 +10,9 @@
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+#include <ImGuiFileDialog.h>
+
+static constexpr char* LoadImageFileDialogKey = "LoadImageFileDialogKey";
 
 Application::~Application() {
 	Shutdown();
@@ -103,6 +106,8 @@ void Application::RenderImGui() {
 
 	RenderMainMenuBar();
 
+	RenderLoadImageDialog();
+
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
@@ -110,14 +115,25 @@ void Application::RenderImGui() {
 void Application::RenderMainMenuBar() {
 	if (ImGui::BeginMainMenuBar()) {
 		if (ImGui::BeginMenu("File")) {
-			ImGui::MenuItem("New", "Ctrl+N");
-			ImGui::MenuItem("Open", "Ctrl+O");
-			ImGui::MenuItem("Save", "Ctrl+S");
+			if (ImGui::MenuItem("Open", "Ctrl+O")) {
+				ImGuiFileDialog::Instance()->OpenDialog(LoadImageFileDialogKey, "Choose Image", ".png,.jpg,.bmp");
+			}
 
 			ImGui::EndMenu();
 		}
 
 		ImGui::EndMainMenuBar();
+	}
+}
+
+void Application::RenderLoadImageDialog() {
+	if (ImGuiFileDialog::Instance()->Display(LoadImageFileDialogKey)) {
+		if (ImGuiFileDialog::Instance()->IsOk()) {
+			std::string filePath = ImGuiFileDialog::Instance()->GetFilePathName();
+			std::cout << "Selected file: " << filePath << std::endl;
+		}
+
+		ImGuiFileDialog::Instance()->Close();
 	}
 }
 

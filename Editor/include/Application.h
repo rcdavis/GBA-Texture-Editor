@@ -25,6 +25,8 @@ private:
 	void RenderImGui();
 	void RenderMainMenuBar();
 
+	void RenderLoadImageDialog();
+
 	static void GlfwErrorCallback(int error, const char* description);
 
 private:
