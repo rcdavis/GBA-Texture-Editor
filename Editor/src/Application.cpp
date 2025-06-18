@@ -12,99 +12,115 @@
 #include <imgui_impl_opengl3.h>
 
 Application::~Application() {
-    Shutdown();
+	Shutdown();
 }
 
 bool Application::Init() {
-    assert(!mImGuiInitialized && "Application is already initialized!");
+	assert(!mImGuiInitialized && "Application is already initialized!");
 
-    glfwSetErrorCallback(GlfwErrorCallback);
+	glfwSetErrorCallback(GlfwErrorCallback);
 
-    if (!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW" << std::endl;
-        return false;
-    }
+	if (!glfwInit()) {
+		std::cerr << "Failed to initialize GLFW" << std::endl;
+		return false;
+	}
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    mWindow = glfwCreateWindow(1280, 720, "GBA Texture Editor", nullptr, nullptr);
-    if (!mWindow) {
-        std::cerr << "Failed to create GLFW window" << std::endl;
-        return false;
-    }
+	mWindow = glfwCreateWindow(1280, 720, "GBA Texture Editor", nullptr, nullptr);
+	if (!mWindow) {
+		std::cerr << "Failed to create GLFW window" << std::endl;
+		return false;
+	}
 
-    glfwMakeContextCurrent(mWindow);
+	glfwMakeContextCurrent(mWindow);
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        std::cerr << "Failed to initialize GLAD" << std::endl;
-        return false;
-    }
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		std::cerr << "Failed to initialize GLAD" << std::endl;
+		return false;
+	}
 
-    glfwSwapInterval(1);
+	glfwSwapInterval(1);
 
-    ImGui::CreateContext();
-    ImGui::StyleColorsDark();
+	ImGui::CreateContext();
+	ImGui::StyleColorsDark();
 
-    /*ImGuiIO& io = ImGui::GetIO();
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;*/
+	/*ImGuiIO& io = ImGui::GetIO();
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;*/
 
-    ImGui_ImplGlfw_InitForOpenGL(mWindow, true);
-    ImGui_ImplOpenGL3_Init("#version 330 core");
+	ImGui_ImplGlfw_InitForOpenGL(mWindow, true);
+	ImGui_ImplOpenGL3_Init("#version 330 core");
 
-    mImGuiInitialized = true;
+	mImGuiInitialized = true;
 
-    glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+	glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
 
-    return true;
+	return true;
 }
 
 void Application::Shutdown() {
-    if (mImGuiInitialized) {
-        ImGui_ImplOpenGL3_Shutdown();
-        ImGui_ImplGlfw_Shutdown();
-        ImGui::DestroyContext();
-        mImGuiInitialized = false;
-    }
+	if (mImGuiInitialized) {
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplGlfw_Shutdown();
+		ImGui::DestroyContext();
+		mImGuiInitialized = false;
+	}
 
-    glfwTerminate();
-    mWindow = nullptr;
+	glfwTerminate();
+	mWindow = nullptr;
 }
 
 void Application::Run() {
-    if (!Init()) {
-        Shutdown();
-        return;
-    }
+	if (!Init()) {
+		Shutdown();
+		return;
+	}
 
-    while (!glfwWindowShouldClose(mWindow)) {
-        glfwPollEvents();
+	while (!glfwWindowShouldClose(mWindow)) {
+		glfwPollEvents();
 
-        Render();
-    }
+		Render();
+	}
 
-    Shutdown();
+	Shutdown();
 }
 
 void Application::Render() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    RenderImGui();
+	RenderImGui();
 
-    glfwSwapBuffers(mWindow);
+	glfwSwapBuffers(mWindow);
 }
 
 void Application::RenderImGui() {
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplGlfw_NewFrame();
+	ImGui::NewFrame();
 
-    ImGui::Render();
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	RenderMainMenuBar();
+
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void Application::RenderMainMenuBar() {
+	if (ImGui::BeginMainMenuBar()) {
+		if (ImGui::BeginMenu("File")) {
+			ImGui::MenuItem("New", "Ctrl+N");
+			ImGui::MenuItem("Open", "Ctrl+O");
+			ImGui::MenuItem("Save", "Ctrl+S");
+
+			ImGui::EndMenu();
+		}
+
+		ImGui::EndMainMenuBar();
+	}
 }
 
 void Application::GlfwErrorCallback(int error, const char* description) {
-    std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
+	std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
 }

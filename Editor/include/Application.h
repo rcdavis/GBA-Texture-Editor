@@ -23,6 +23,7 @@ public:
 private:
 	void Render();
 	void RenderImGui();
+	void RenderMainMenuBar();
 
 	static void GlfwErrorCallback(int error, const char* description);
 
