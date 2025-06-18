@@ -10,11 +10,16 @@ add_library(ImGui
     src/imgui_impl_opengl3.cpp
     src/ImGuiFileDialog.cpp
     glad/src/glad.c
+    stb/src/stb_image.c
 )
 
 target_include_directories(ImGui PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/glad/include
+)
+
+target_include_directories(ImGui PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/stb/include
 )
 
 target_link_libraries(ImGui PRIVATE glfw)

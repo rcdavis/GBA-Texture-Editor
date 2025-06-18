@@ -6,6 +6,7 @@
 				"${workspaceFolder}/Editor/include/",
 				"${workspaceFolder}/ImGui/include/",
 				"${workspaceFolder}/ImGui/glad/include/",
+				"${workspaceFolder}/ImGui/stb/include/",
 				"/usr/include"
 			],
 			"defines": [
