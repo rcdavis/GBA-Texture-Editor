@@ -131,10 +131,11 @@ void Application::RenderMainMenuBar() {
 }
 
 void Application::RenderLoadImageDialog() {
+	ImGui::SetNextWindowSize(ImVec2(700, 350), ImGuiCond_FirstUseEver);
 	if (ImGuiFileDialog::Instance()->Display(LoadImageFileDialogKey)) {
 		if (ImGuiFileDialog::Instance()->IsOk()) {
 			std::string filePath = ImGuiFileDialog::Instance()->GetFilePathName();
-			std::cout << "Selected file: " << filePath << std::endl;
+			LOG_INFO("Selected file: {0}", filePath);
 		}
 
 		ImGuiFileDialog::Instance()->Close();
