@@ -19,6 +19,10 @@ bool Application::Init() {
         return false;
     }
 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
     mWindow = glfwCreateWindow(1280, 720, "GBA Texture Editor", nullptr, nullptr);
     if (!mWindow) {
         std::cerr << "Failed to create GLFW window" << std::endl;
