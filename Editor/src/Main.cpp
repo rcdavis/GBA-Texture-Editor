@@ -1,8 +1,9 @@
 
-#include <iostream>
+#include "Application.h"
 
 int main() {
-    std::cout << "Initializing GBA Texture Editor..." << std::endl;
+	Application app;
+	app.Run();
 
-    return 0;
+	return 0;
 }
