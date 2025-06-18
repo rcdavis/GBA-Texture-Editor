@@ -2,14 +2,6 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Run Editor",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/build/Editor/Editor",
-			"cwd": "${workspaceFolder}/build/Editor",
-			"preLaunchTask": "Build Editor"
-		},
-		{
 			"name": "GDB Debugging",
 			"type": "cppdbg",
 			"request": "launch",
@@ -28,6 +20,14 @@
 				}
 			],
 			"miDebuggerPath": "/usr/bin/gdb",
+			"preLaunchTask": "Build Editor"
+		},
+		{
+			"name": "Run Editor",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/Editor/Editor",
+			"cwd": "${workspaceFolder}/build/Editor",
 			"preLaunchTask": "Build Editor"
 		}
 	]
