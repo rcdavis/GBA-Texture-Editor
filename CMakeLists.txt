@@ -4,6 +4,3 @@ project(GBATextureEditor VERSION 1.0.0 LANGUAGES CXX)
 
 add_subdirectory(Engine)
 add_subdirectory(Editor)
-
-# TODO: Set to Release for final builds
-set(CMAKE_BUILD_TYPE Debug)

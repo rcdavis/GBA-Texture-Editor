@@ -12,6 +12,8 @@
 #include <imgui_impl_opengl3.h>
 #include <ImGuiFileDialog.h>
 
+#include "Log.h"
+
 static constexpr char* LoadImageFileDialogKey = "LoadImageFileDialogKey";
 
 Application::~Application() {
@@ -24,7 +26,7 @@ bool Application::Init() {
 	glfwSetErrorCallback(GlfwErrorCallback);
 
 	if (!glfwInit()) {
-		std::cerr << "Failed to initialize GLFW" << std::endl;
+		LOG_ERROR("Failed to initialize GLFW");
 		return false;
 	}
 
@@ -34,14 +36,14 @@ bool Application::Init() {
 
 	mWindow = glfwCreateWindow(1280, 720, "GBA Texture Editor", nullptr, nullptr);
 	if (!mWindow) {
-		std::cerr << "Failed to create GLFW window" << std::endl;
+		LOG_ERROR("Failed to create GLFW window");
 		return false;
 	}
 
 	glfwMakeContextCurrent(mWindow);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		std::cerr << "Failed to initialize GLAD" << std::endl;
+		LOG_ERROR("Failed to initialize GLAD");
 		return false;
 	}
 
@@ -60,6 +62,8 @@ bool Application::Init() {
 	mImGuiInitialized = true;
 
 	glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+
+	LOG_INFO("Application initialized successfully");
 
 	return true;
 }
@@ -138,5 +142,5 @@ void Application::RenderLoadImageDialog() {
 }
 
 void Application::GlfwErrorCallback(int error, const char* description) {
-	std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
+	LOG_ERROR("GLFW Error ({0}): {1}", error, description);
 }

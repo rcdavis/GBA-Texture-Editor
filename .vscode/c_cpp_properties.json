@@ -10,11 +10,9 @@
 				"${workspaceFolder}/Engine/ImGui/include/",
 				"${workspaceFolder}/Engine/stb/include/",
 				"${workspaceFolder}/Engine/glm/include/",
-				"${workspaceFolder}/Engine/spdlog/include/",
 				"/usr/include"
 			],
 			"defines": [
-				"SPDLOG_COMPILED_LIB",
 				"GLFW_INCLUDE_NONE",
 				"LOGGING_ENABLED",
 				"ASSERTS_ENABLED"
