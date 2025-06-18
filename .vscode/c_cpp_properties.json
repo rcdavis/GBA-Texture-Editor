@@ -1,12 +1,13 @@
 {
 	"configurations": [
 		{
-			"name": "Linux",
+			"name": "Linux (Debug)",
 			"includePath": [
 				"${workspaceFolder}/Editor/include/",
-				"${workspaceFolder}/ImGui/include/",
-				"${workspaceFolder}/ImGui/glad/include/",
-				"${workspaceFolder}/ImGui/stb/include/",
+				"${workspaceFolder}/Engine/include/",
+				"${workspaceFolder}/Engine/glad/include/",
+				"${workspaceFolder}/Engine/ImGuiFileDialog/include/",
+				"${workspaceFolder}/Engine/stb/include/",
 				"/usr/include"
 			],
 			"defines": [

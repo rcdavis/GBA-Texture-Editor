@@ -8,7 +8,7 @@ add_library(Engine STATIC
     src/imgui_demo.cpp
     src/imgui_impl_glfw.cpp
     src/imgui_impl_opengl3.cpp
-    src/ImGuiFileDialog.cpp
+    ImGuiFileDialog/src/ImGuiFileDialog.cpp
     glad/src/glad.c
     stb/src/stb_image.c
 )
@@ -16,6 +16,7 @@ add_library(Engine STATIC
 target_include_directories(Engine PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/glad/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/ImGuiFileDialog/include
 )
 
 target_include_directories(Engine PRIVATE
