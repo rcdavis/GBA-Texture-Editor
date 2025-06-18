@@ -15,7 +15,7 @@
 			"request": "launch",
 			"program": "${workspaceFolder}/build/Editor/Editor",
 			"args": [],
-			"stopAtEntry": true,
+			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}/build/Editor",
 			"environment": [],
 			"externalConsole": false,

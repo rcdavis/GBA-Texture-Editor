@@ -16,7 +16,7 @@ int main() {
         return -1;
     }
 
-    GLFWwindow* window = glfwCreateWindow(1200, 900, "GBA Texture Editor", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(1280, 720, "GBA Texture Editor", nullptr, nullptr);
     if (!window) {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
