@@ -7,11 +7,17 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
+
 Application::~Application() {
     Shutdown();
 }
 
 bool Application::Init() {
+    assert(!mImGuiInitialized && "Application is already initialized!");
+
     glfwSetErrorCallback(GlfwErrorCallback);
 
     if (!glfwInit()) {
@@ -38,13 +44,33 @@ bool Application::Init() {
 
     glfwSwapInterval(1);
 
+    ImGui::CreateContext();
+    ImGui::StyleColorsDark();
+
+    /*ImGuiIO& io = ImGui::GetIO();
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;*/
+
+    ImGui_ImplGlfw_InitForOpenGL(mWindow, true);
+    ImGui_ImplOpenGL3_Init("#version 330 core");
+
+    mImGuiInitialized = true;
+
+    glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+
     return true;
 }
 
 void Application::Shutdown() {
+    if (mImGuiInitialized) {
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
+        mImGuiInitialized = false;
+    }
+
     glfwTerminate();
     mWindow = nullptr;
-    mImGuiInitialized = false;
 }
 
 void Application::Run() {
@@ -56,10 +82,27 @@ void Application::Run() {
     while (!glfwWindowShouldClose(mWindow)) {
         glfwPollEvents();
 
-        glfwSwapBuffers(mWindow);
+        Render();
     }
 
     Shutdown();
+}
+
+void Application::Render() {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    RenderImGui();
+
+    glfwSwapBuffers(mWindow);
+}
+
+void Application::RenderImGui() {
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 void Application::GlfwErrorCallback(int error, const char* description) {

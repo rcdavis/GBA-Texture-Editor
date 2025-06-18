@@ -21,6 +21,9 @@ public:
 	void Run();
 
 private:
+	void Render();
+	void RenderImGui();
+
 	static void GlfwErrorCallback(int error, const char* description);
 
 private:
