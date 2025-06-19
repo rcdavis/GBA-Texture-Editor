@@ -2,10 +2,10 @@
 Tool for viewing, editing, and exporting textures for GBA development. Mainly being developed on Linux.
 
 ## Setup and Building
-The project uses [GLFW](https://www.glfw.org/docs/3.3/quick.html), [Glad](https://glad.dav1d.de/), and [ImGui](https://github.com/ocornut/imgui/tree/v1.91.9b-docking) for rendering and UI. Glad and ImGui are built in the project but GLFW is installed via apt.
+The project uses 3rd Party code: [GLFW](https://www.glfw.org/docs/3.3/quick.html), [Glad](https://github.com/Dav1dde/glad), [Spdlog](https://github.com/gabime/spdlog), and [ImGui](https://github.com/ocornut/imgui/tree/v1.91.9b-docking). GLFW and Spdlog are installed via apt on Linux.
 
 ```bash
-sudo apt install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
+sudo apt install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev libspdlog-dev
 ```
 
 Then, configuring with cmake:

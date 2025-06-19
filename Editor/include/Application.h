@@ -1,7 +1,11 @@
 
 #pragma once
 
+#include "Core.h"
+
 struct GLFWwindow;
+
+class GLTexture;
 
 class Application {
 public:
@@ -25,9 +29,13 @@ private:
 	void RenderImGui();
 	void RenderMainMenuBar();
 
+	void RenderLoadImageDialog();
+
 	static void GlfwErrorCallback(int error, const char* description);
 
 private:
 	GLFWwindow* mWindow = nullptr;
 	bool mImGuiInitialized = false;
+
+	Ref<GLTexture> mCurrentTexture;
 };
