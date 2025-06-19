@@ -3,6 +3,7 @@ project(Editor)
 add_executable(Editor
     src/Application.cpp
     src/Main.cpp
+    src/ImGuiWindows/BaseImGuiWindow.cpp
 )
 
 target_include_directories(Editor PUBLIC
