@@ -112,6 +112,12 @@ void Application::RenderImGui() {
 
 	RenderMainMenuBar();
 
+	if (mCurrentTexture && mCurrentTexture->IsLoaded()) {
+		ImGui::Begin("Texture Viewer");
+		ImGui::Image((ImTextureID)mCurrentTexture->GetId(), ImVec2(mCurrentTexture->GetWidth(), mCurrentTexture->GetHeight()));
+		ImGui::End();
+	}
+
 	RenderLoadImageDialog();
 
 	ImGui::Render();
