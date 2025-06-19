@@ -14,6 +14,8 @@
 
 #include "Log.h"
 
+#include "OpenGL/GLTexture.h"
+
 static constexpr char* LoadImageFileDialogKey = "LoadImageFileDialogKey";
 
 Application::~Application() {
@@ -135,7 +137,9 @@ void Application::RenderLoadImageDialog() {
 	if (ImGuiFileDialog::Instance()->Display(LoadImageFileDialogKey)) {
 		if (ImGuiFileDialog::Instance()->IsOk()) {
 			std::string filePath = ImGuiFileDialog::Instance()->GetFilePathName();
-			LOG_INFO("Selected file: {0}", filePath);
+			LOG_INFO("Loading file: {0}...", filePath);
+			mCurrentTexture = GLTexture::Load(filePath);
+			LOG_INFO("Loaded file: {0}...", filePath);
 		}
 
 		ImGuiFileDialog::Instance()->Close();

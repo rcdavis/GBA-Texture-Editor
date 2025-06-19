@@ -33,16 +33,18 @@ GLTexture::GLTexture(const std::filesystem::path &filepath) {
 
 	assert(mInternalFormat & mDataFormat && "Format not supported");
 
-	glCreateTextures(GL_TEXTURE_2D, 1, &mId);
-	glTextureStorage2D(mId, 1, mInternalFormat, mWidth, mHeight);
+	glGenTextures(1, &mId);
+	glBindTexture(GL_TEXTURE_2D, mId);
+	glTexImage2D(GL_TEXTURE_2D, 0, mInternalFormat, mWidth, mHeight, 0, mDataFormat, GL_UNSIGNED_BYTE, data);
+	glGenerateMipmap(GL_TEXTURE_2D);
 
-	glTextureParameteri(mId, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTextureParameteri(mId, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glTextureParameteri(mId, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTextureParameteri(mId, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-	glTextureSubImage2D(mId, 0, 0, 0, mWidth, mHeight, mDataFormat, GL_UNSIGNED_BYTE, data);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, mWidth, mHeight, mDataFormat, GL_UNSIGNED_BYTE, data);
 
 	stbi_image_free(data);
 }
