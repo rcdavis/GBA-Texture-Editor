@@ -4,6 +4,7 @@ add_executable(Editor
     src/Application.cpp
     src/Main.cpp
     src/ImGuiWindows/BaseImGuiWindow.cpp
+    src/Input/Input.cpp
 )
 
 target_include_directories(Editor PUBLIC

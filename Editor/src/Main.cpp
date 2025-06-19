@@ -7,8 +7,7 @@ int main() {
 
 	LOG_INFO("GBA Texture Editor started...");
 
-	Application app;
-	app.Run();
+	Application::Get().Run();
 
 	LOG_INFO("GBA Texture Editor stopped...");
 

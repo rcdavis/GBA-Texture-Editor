@@ -14,7 +14,7 @@ namespace Utils {
 	}
 
 	static void CreateTextures(const bool multisampled, uint32 *const outId, const uint32 count) {
-		glCreateTextures(TextureTarget(multisampled), count, outId);
+		glGenTextures(count, outId);
 	}
 
 	static void BindTexture(const bool multisampled, const uint32 id) {
@@ -58,7 +58,7 @@ namespace Utils {
 		if (multisampled) {
 			glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, format, width, height, GL_FALSE);
 		} else {
-			glTexStorage2D(GL_TEXTURE_2D, 1, format, width, height);
+			glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, nullptr);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -129,7 +129,7 @@ void GLFramebuffer::Invalidate() {
 		mDepthAttachment = 0;
 	}
 
-	glCreateFramebuffers(1, &mId);
+	glGenFramebuffers(1, &mId);
 	glBindFramebuffer(GL_FRAMEBUFFER, mId);
 
 	const bool multisample = mSpecs.samples > 1;
